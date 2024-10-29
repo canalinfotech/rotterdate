@@ -3,11 +3,13 @@ name: Deploy
 on:
   push:
     branches:
-      - main  # or master, depending on your default branch name
+      - main
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     
     steps:
       - name: Checkout repository
@@ -16,17 +18,28 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'  # Specify your Node.js version
+          node-version: '18'
 
       - name: Install dependencies
-        run: npm install  # or yarn install
+        run: npm install
 
       - name: Build
-        run: npm run build  # or your build command
+        run: npm run build
 
-      # Example deployment step (for GitHub Pages)
+      - name: Configure security headers
+        run: |
+          echo '/*' > ./build/_headers
+          echo '  Strict-Transport-Security: max-age=31536000; includeSubDomains' >> ./build/_headers
+          echo '  X-Content-Type-Options: nosniff' >> ./build/_headers
+          echo '  X-Frame-Options: DENY' >> ./build/_headers
+          echo '  X-XSS-Protection: 1; mode=block' >> ./build/_headers
+          echo '  Referrer-Policy: strict-origin-when-cross-origin' >> ./build/_headers
+          echo '  Content-Security-Policy: upgrade-insecure-requests' >> ./build/_headers
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build  # or ./dist, depending on your build output 
+          publish_dir: ./build
+          force_orphan: true
+          enable_jekyll: false
