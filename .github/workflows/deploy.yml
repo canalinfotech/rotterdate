@@ -28,6 +28,9 @@ jobs:
 
       - name: Configure security headers
         run: |
+          # Make sure build directory exists
+          mkdir -p ./build
+          # Create headers file
           echo '/*' > ./build/_headers
           echo '  Strict-Transport-Security: max-age=31536000; includeSubDomains' >> ./build/_headers
           echo '  X-Content-Type-Options: nosniff' >> ./build/_headers
