@@ -1,101 +1,149 @@
-import Image from "next/image";
+"use client"
 
-export default function Home() {
+import { useState } from 'react'
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Heart, Calendar, Clock, MapPin } from "lucide-react"
+
+// Add this interface near the top of the file, before the itineraries array
+interface Itinerary {
+  id: number
+  title: string
+  description: string
+  duration: string
+  location: string
+  image: string
+}
+
+const itineraries = [
+  {
+    id: 1,
+    title: "Romantic River Cruise",
+    description: "Enjoy a scenic cruise along the Maas River with dinner and live music.",
+    duration: "3 hours",
+    location: "Erasmus Bridge",
+    image: "/placeholder.svg?height=400&width=600"
+  },
+  {
+    id: 2,
+    title: "Culinary Adventure",
+    description: "Experience a gastronomic journey through Rotterdam's finest restaurants.",
+    duration: "4 hours",
+    location: "Markthal",
+    image: "/placeholder.svg?height=400&width=600"
+  },
+  {
+    id: 3,
+    title: "Sunset Picnic at Kralingse Plas",
+    description: "Relax with a gourmet picnic basket as you watch the sunset over the lake.",
+    duration: "2 hours",
+    location: "Kralingse Plas",
+    image: "/placeholder.svg?height=400&width=600"
+  }
+]
+
+export default function Component() {
+  const [selectedItinerary, setSelectedItinerary] = useState<Itinerary | null>(null)
+
+  const handleBooking = (itinerary: Itinerary) => {
+    setSelectedItinerary(itinerary)
+    // Here you would typically open a modal or navigate to a booking page
+    alert(`Booking ${itinerary.title}. In a real app, this would open a booking form.`)
+  }
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+    <div className="flex flex-col min-h-screen bg-rose-50">
+      <header className="px-4 lg:px-6 h-16 flex items-center bg-white shadow-sm">
+        <Link className="flex items-center justify-center" href="#">
+          <Heart className="h-6 w-6 text-rose-600" />
+          <span className="ml-2 text-2xl font-bold text-rose-800">rotterdate</span>
+        </Link>
+        <nav className="ml-auto flex gap-4 sm:gap-6">
+          <Link className="text-sm font-medium hover:underline underline-offset-4 text-rose-700" href="#">
+            Home
+          </Link>
+          <Link className="text-sm font-medium hover:underline underline-offset-4 text-rose-700" href="#">
+            Itineraries
+          </Link>
+          <Link className="text-sm font-medium hover:underline underline-offset-4 text-rose-700" href="#">
+            About
+          </Link>
+          <Link className="text-sm font-medium hover:underline underline-offset-4 text-rose-700" href="#">
+            Contact
+          </Link>
+        </nav>
+      </header>
+      <main className="flex-1">
+        <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48 bg-rose-100">
+          <div className="container px-4 md:px-6">
+            <div className="flex flex-col items-center space-y-4 text-center">
+              <div className="space-y-2">
+                <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none text-rose-800">
+                  Plan Your Perfect Date Night in Rotterdam
+                </h1>
+                <p className="mx-auto max-w-[700px] text-rose-700 md:text-xl">
+                  Discover curated itineraries for unforgettable experiences. Choose, book, and enjoy your romantic evening
+                  without the stress of planning.
+                </p>
+              </div>
+              <div className="space-x-4">
+                <Button className="bg-rose-600 text-white hover:bg-rose-700">Explore Itineraries</Button>
+                <Button variant="outline" className="border-rose-600 text-rose-600 hover:bg-rose-100">
+                  How It Works
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section className="w-full py-12 md:py-24 lg:py-32 bg-white">
+          <div className="container px-4 md:px-6">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-rose-800 mb-8 text-center">
+              Curated Date Night Itineraries
+            </h2>
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {itineraries.map((itinerary) => (
+                <Card key={itinerary.id} className="flex flex-col">
+                  <CardHeader>
+                    <img src={itinerary.image} alt={itinerary.title} className="w-full h-48 object-cover rounded-t-lg" />
+                  </CardHeader>
+                  <CardContent className="flex-grow">
+                    <CardTitle className="text-xl font-bold text-rose-800">{itinerary.title}</CardTitle>
+                    <CardDescription className="text-rose-600 mt-2">{itinerary.description}</CardDescription>
+                    <div className="flex items-center mt-4 text-rose-700">
+                      <Clock className="w-4 h-4 mr-2" />
+                      <span>{itinerary.duration}</span>
+                    </div>
+                    <div className="flex items-center mt-2 text-rose-700">
+                      <MapPin className="w-4 h-4 mr-2" />
+                      <span>{itinerary.location}</span>
+                    </div>
+                  </CardContent>
+                  <CardFooter>
+                    <Button 
+                      className="w-full bg-rose-600 text-white hover:bg-rose-700"
+                      onClick={() => handleBooking(itinerary)}
+                    >
+                      Book This Date
+                    </Button>
+                  </CardFooter>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t bg-white">
+        <p className="text-xs text-rose-500">© 2024 rotterdate.nl. All rights reserved.</p>
+        <nav className="sm:ml-auto flex gap-4 sm:gap-6">
+          <Link className="text-xs hover:underline underline-offset-4 text-rose-600" href="#">
+            Terms of Service
+          </Link>
+          <Link className="text-xs hover:underline underline-offset-4 text-rose-600" href="#">
+            Privacy
+          </Link>
+        </nav>
       </footer>
     </div>
-  );
+  )
 }
