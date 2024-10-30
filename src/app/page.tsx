@@ -45,7 +45,7 @@ const itineraries = [
 ]
 
 export default function Component() {
-  const [selectedItinerary, setSelectedItinerary] = useState<Itinerary | null>(null)
+  const [, setSelectedItinerary] = useState<Itinerary | null>(null)
 
   const handleBooking = (itinerary: Itinerary) => {
     setSelectedItinerary(itinerary)
