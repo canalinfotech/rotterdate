@@ -60,7 +60,7 @@ export default function Component() {
           <Heart className="h-6 w-6 text-rose-600" />
           <span className="ml-2 text-2xl font-bold text-rose-800">rotterdate</span>
         </Link>
-        <nav className="ml-auto flex gap-4 sm:gap-6">
+        <nav className="ml-auto hidden md:flex gap-4 sm:gap-6">
           <Link className="text-sm font-medium hover:underline underline-offset-4 text-rose-700" href="#">
             Home
           </Link>
@@ -74,16 +74,23 @@ export default function Component() {
             Contact
           </Link>
         </nav>
+        <nav className="ml-auto flex md:hidden">
+          <button className="p-2">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </nav>
       </header>
       <main className="flex-1">
-        <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48 bg-rose-100">
+        <section className="w-full py-8 md:py-24 lg:py-32 xl:py-48 bg-rose-100">
           <div className="container px-4 md:px-6">
             <div className="flex flex-col items-center space-y-4 text-center">
               <div className="space-y-2">
-                <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none text-rose-800">
+                <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tighter text-rose-800">
                   Plan Your Perfect Date Night in Rotterdam
                 </h1>
-                <p className="mx-auto max-w-[700px] text-rose-700 md:text-xl">
+                <p className="mx-auto max-w-[700px] text-sm md:text-base text-rose-700">
                   Discover curated itineraries for unforgettable experiences. Choose, book, and enjoy your romantic evening
                   without the stress of planning.
                 </p>
@@ -97,12 +104,9 @@ export default function Component() {
             </div>
           </div>
         </section>
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-white">
-          <div className="container px-4 md:px-6">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-rose-800 mb-8 text-center">
-              Curated Date Night Itineraries
-            </h2>
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <section className="w-full py-4 md:py-12 bg-white">
+          <div className="container px-2 md:px-6">
+            <div className="grid grid-cols-1 gap-2 md:gap-4">
               {itineraries.map((itinerary) => (
                 <Card key={itinerary.id} className="flex flex-col">
                   <CardHeader>
