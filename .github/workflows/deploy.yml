@@ -1,48 +1,29 @@
-name: Deploy
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches:
-      - main
+      - main  # Set this to your default branch
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v2
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
         with:
-          node-version: '18'
-
+          node-version: '18'  # Set this to your Node.js version
+          
       - name: Install dependencies
         run: npm install
-
+        
       - name: Build
         run: npm run build
-
-      - name: Configure security headers
-        run: |
-          # Make sure build directory exists
-          mkdir -p ./build
-          # Create headers file
-          echo '/*' > ./build/_headers
-          echo '  Strict-Transport-Security: max-age=31536000; includeSubDomains' >> ./build/_headers
-          echo '  X-Content-Type-Options: nosniff' >> ./build/_headers
-          echo '  X-Frame-Options: DENY' >> ./build/_headers
-          echo '  X-XSS-Protection: 1; mode=block' >> ./build/_headers
-          echo '  Referrer-Policy: strict-origin-when-cross-origin' >> ./build/_headers
-          echo '  Content-Security-Policy: upgrade-insecure-requests' >> ./build/_headers
-
-      - name: Deploy to GitHub Pages
+        
+      - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
-          force_orphan: true
-          enable_jekyll: false
+          publish_dir: ./out  # The folder that Next.js builds to
