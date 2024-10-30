@@ -23,7 +23,7 @@ const itineraries: Itinerary[] = [
     description: "Indulge in an exquisite 7-course tasting menu at Rotterdam's finest Michelin-starred restaurant.",
     duration: "3 hours",
     location: "City Center",
-    image: "/placeholder.svg?height=400&width=600"
+    image: "/5-star-dining.jpg?height=400&width=600"
   },
   {
     id: 2,
@@ -31,7 +31,7 @@ const itineraries: Itinerary[] = [
     description: "Enjoy a luxurious private yacht cruise along the Maas River with champagne and gourmet hors d'oeuvres.",
     duration: "4 hours",
     location: "Rotterdam Harbor",
-    image: "/placeholder.svg?height=400&width=600"
+    image: "/private-yacht.jpg?height=400&width=600"
   },
   {
     id: 3,
@@ -39,7 +39,7 @@ const itineraries: Itinerary[] = [
     description: "Experience an after-hours, curator-led tour of Rotterdam's most exclusive art galleries, followed by craft cocktails.",
     duration: "3 hours",
     location: "Arts District",
-    image: "/placeholder.svg?height=400&width=600"
+    image: "/art-gallery.jpg?height=400&width=600"
   }
 ]
 
