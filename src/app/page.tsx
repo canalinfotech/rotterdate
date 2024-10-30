@@ -43,6 +43,8 @@ const itineraries: Itinerary[] = [
   }
 ]
 
+
+
 export default function Component() {
   const [scrollPosition, setScrollPosition] = useState<number>(0)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -67,7 +69,7 @@ export default function Component() {
       }`}>
         <Link className="flex items-center justify-center" href="#">
           <Star className="h-8 w-8 text-yellow-500" />
-          <span className="ml-2 text-2xl font-bold">rotterdate</span>
+          <span className="ml-2 text-2xl font-bold">Rotterdate</span>
         </Link>
         <nav className="hidden md:flex ml-auto gap-6 sm:gap-8">
           <Link className="text-sm font-medium hover:text-yellow-500 transition-colors" href="#">
@@ -179,7 +181,7 @@ export default function Component() {
       <footer className="py-8 w-full shrink-0 bg-gray-900 border-t border-gray-800">
         <div className="container px-4 md:px-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-sm text-gray-400 mb-4 md:mb-0">© 2024 rotterdate.nl. All rights reserved.</p>
+            <p className="text-sm text-gray-400 mb-4 md:mb-0">© 2024 Rotterdate.nl. All rights reserved.</p>
             <nav className="flex gap-6">
               <Link className="text-sm hover:text-yellow-500 text-gray-400 transition-colors" href="#">
                 Terms of Service
