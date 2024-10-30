@@ -4,7 +4,8 @@ import { useState } from 'react'
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Heart, Calendar, Clock, MapPin } from "lucide-react"
+import { Heart, Clock, MapPin } from "lucide-react"
+import Image from 'next/image'
 
 // Add this interface near the top of the file, before the itineraries array
 interface Itinerary {
@@ -105,7 +106,12 @@ export default function Component() {
               {itineraries.map((itinerary) => (
                 <Card key={itinerary.id} className="flex flex-col">
                   <CardHeader>
-                    <img src={itinerary.image} alt={itinerary.title} className="w-full h-48 object-cover rounded-t-lg" />
+                    <Image 
+                      src={itinerary.image} 
+                      alt={itinerary.title}
+                      width={500}  // specify appropriate width
+                      height={300} // specify appropriate height
+                    />
                   </CardHeader>
                   <CardContent className="flex-grow">
                     <CardTitle className="text-xl font-bold text-rose-800">{itinerary.title}</CardTitle>
