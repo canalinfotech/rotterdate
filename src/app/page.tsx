@@ -1,13 +1,12 @@
 "use client"
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from "next/link"
+import Image from 'next/image'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Heart, Clock, MapPin } from "lucide-react"
-import Image from 'next/image'
+import { Clock, MapPin, Star, Menu } from "lucide-react"
 
-// Add this interface near the top of the file, before the itineraries array
 interface Itinerary {
   id: number
   title: string
@@ -17,124 +16,160 @@ interface Itinerary {
   image: string
 }
 
-const itineraries = [
+const itineraries: Itinerary[] = [
   {
     id: 1,
-    title: "Romantic River Cruise",
-    description: "Enjoy a scenic cruise along the Maas River with dinner and live music.",
+    title: "Michelin Star Dining Experience",
+    description: "Indulge in an exquisite 7-course tasting menu at Rotterdam's finest Michelin-starred restaurant.",
     duration: "3 hours",
-    location: "Erasmus Bridge",
+    location: "City Center",
     image: "/placeholder.svg?height=400&width=600"
   },
   {
     id: 2,
-    title: "Culinary Adventure",
-    description: "Experience a gastronomic journey through Rotterdam's finest restaurants.",
+    title: "Private Yacht Sunset Cruise",
+    description: "Enjoy a luxurious private yacht cruise along the Maas River with champagne and gourmet hors d'oeuvres.",
     duration: "4 hours",
-    location: "Markthal",
+    location: "Rotterdam Harbor",
     image: "/placeholder.svg?height=400&width=600"
   },
   {
     id: 3,
-    title: "Sunset Picnic at Kralingse Plas",
-    description: "Relax with a gourmet picnic basket as you watch the sunset over the lake.",
-    duration: "2 hours",
-    location: "Kralingse Plas",
+    title: "VIP Art Gallery Tour & Cocktails",
+    description: "Experience an after-hours, curator-led tour of Rotterdam's most exclusive art galleries, followed by craft cocktails.",
+    duration: "3 hours",
+    location: "Arts District",
     image: "/placeholder.svg?height=400&width=600"
   }
 ]
 
 export default function Component() {
-  const [, setSelectedItinerary] = useState<Itinerary | null>(null)
+  const [selectedItinerary, setSelectedItinerary] = useState<Itinerary | null>(null)
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
+  const [scrollPosition, setScrollPosition] = useState<number>(0)
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollPosition(window.scrollY)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const handleBooking = (itinerary: Itinerary) => {
     setSelectedItinerary(itinerary)
-    // Here you would typically open a modal or navigate to a booking page
     alert(`Booking ${itinerary.title}. In a real app, this would open a booking form.`)
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-rose-50">
-      <header className="px-4 lg:px-6 h-16 flex items-center bg-white shadow-sm">
+    <div className="flex flex-col min-h-screen bg-gray-900 text-gray-100">
+      <header className={`fixed w-full px-4 lg:px-6 h-20 flex items-center transition-all duration-300 z-50 ${
+        scrollPosition > 50 ? 'bg-gray-900 shadow-lg' : 'bg-transparent'
+      }`}>
         <Link className="flex items-center justify-center" href="#">
-          <Heart className="h-6 w-6 text-rose-600" />
-          <span className="ml-2 text-2xl font-bold text-rose-800">rotterdate</span>
+          <Star className="h-8 w-8 text-yellow-500" />
+          <span className="ml-2 text-2xl font-bold">rotterdate</span>
         </Link>
-        <nav className="ml-auto hidden md:flex gap-4 sm:gap-6">
-          <Link className="text-sm font-medium hover:underline underline-offset-4 text-rose-700" href="#">
+        <nav className="hidden md:flex ml-auto gap-6 sm:gap-8">
+          <Link className="text-sm font-medium hover:text-yellow-500 transition-colors" href="#">
             Home
           </Link>
-          <Link className="text-sm font-medium hover:underline underline-offset-4 text-rose-700" href="#">
-            Itineraries
+          <Link className="text-sm font-medium hover:text-yellow-500 transition-colors" href="#">
+            Experiences
           </Link>
-          <Link className="text-sm font-medium hover:underline underline-offset-4 text-rose-700" href="#">
+          <Link className="text-sm font-medium hover:text-yellow-500 transition-colors" href="#">
             About
           </Link>
-          <Link className="text-sm font-medium hover:underline underline-offset-4 text-rose-700" href="#">
+          <Link className="text-sm font-medium hover:text-yellow-500 transition-colors" href="#">
             Contact
           </Link>
         </nav>
-        <nav className="ml-auto flex md:hidden">
-          <button className="p-2">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
-        </nav>
+        <Button 
+          variant="ghost" 
+          className="md:hidden ml-auto" 
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          <Menu className="h-6 w-6" />
+        </Button>
       </header>
+      {isMenuOpen && (
+        <div className="fixed inset-0 bg-gray-900 z-40 flex flex-col items-center justify-center">
+          <nav className="flex flex-col gap-6 text-center">
+            <Link className="text-xl font-medium hover:text-yellow-500 transition-colors" href="#" onClick={() => setIsMenuOpen(false)}>
+              Home
+            </Link>
+            <Link className="text-xl font-medium hover:text-yellow-500 transition-colors" href="#" onClick={() => setIsMenuOpen(false)}>
+              Experiences
+            </Link>
+            <Link className="text-xl font-medium hover:text-yellow-500 transition-colors" href="#" onClick={() => setIsMenuOpen(false)}>
+              About
+            </Link>
+            <Link className="text-xl font-medium hover:text-yellow-500 transition-colors" href="#" onClick={() => setIsMenuOpen(false)}>
+              Contact
+            </Link>
+          </nav>
+          <Button 
+            variant="ghost" 
+            className="absolute top-4 right-4" 
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          </Button>
+        </div>
+      )}
       <main className="flex-1">
-        <section className="w-full py-8 md:py-24 lg:py-32 xl:py-48 bg-rose-100">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tighter text-rose-800">
-                  Plan Your Perfect Date Night in Rotterdam
-                </h1>
-                <p className="mx-auto max-w-[700px] text-sm md:text-base text-rose-700">
-                  Discover curated itineraries for unforgettable experiences. Choose, book, and enjoy your romantic evening
-                  without the stress of planning.
-                </p>
-              </div>
-              <div className="space-x-4">
-                <Button className="bg-rose-600 text-white hover:bg-rose-700">Explore Itineraries</Button>
-                <Button variant="outline" className="border-rose-600 text-rose-600 hover:bg-rose-100">
-                  How It Works
-                </Button>
-              </div>
+        <section className="w-full h-screen flex items-center justify-center bg-[url('/placeholder.svg?height=1080&width=1920')] bg-cover bg-center">
+          <div className="container px-4 md:px-6 text-center">
+            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl/none mb-6">
+              Elevate Your Date Night in Rotterdam
+            </h1>
+            <p className="mx-auto max-w-[700px] text-gray-300 md:text-xl mb-8">
+              Curated, luxurious experiences for discerning couples. Effortlessly plan and book your perfect evening.
+            </p>
+            <div className="space-x-4">
+              <Button className="bg-yellow-500 text-gray-900 hover:bg-yellow-400">Explore Experiences</Button>
+              <Button variant="outline" className="border-gray-300 text-gray-300 hover:bg-gray-800">
+                Our Process
+              </Button>
             </div>
           </div>
         </section>
-        <section className="w-full py-4 md:py-12 bg-white">
-          <div className="container px-2 md:px-6">
-            <div className="grid grid-cols-1 gap-2 md:gap-4">
+        <section className="w-full py-20 md:py-32 bg-gray-800">
+          <div className="container px-4 md:px-6">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-gray-100 mb-12 text-center">
+              Exclusive Date Experiences
+            </h2>
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {itineraries.map((itinerary) => (
-                <Card key={itinerary.id} className="flex flex-col">
-                  <CardHeader>
-                    <Image 
-                      src={itinerary.image} 
+                <Card key={itinerary.id} className="flex flex-col overflow-hidden border-0 shadow-lg bg-gray-700 hover:shadow-xl transition-shadow duration-300">
+                  <CardHeader className="p-0">
+                    <Image
+                      src={itinerary.image}
                       alt={itinerary.title}
-                      width={500}  // specify appropriate width
-                      height={300} // specify appropriate height
+                      width={600}
+                      height={400}
+                      className="w-full h-64 object-cover transition-transform duration-300 hover:scale-105"
                     />
                   </CardHeader>
-                  <CardContent className="flex-grow">
-                    <CardTitle className="text-xl font-bold text-rose-800">{itinerary.title}</CardTitle>
-                    <CardDescription className="text-rose-600 mt-2">{itinerary.description}</CardDescription>
-                    <div className="flex items-center mt-4 text-rose-700">
+                  <CardContent className="flex-grow p-6">
+                    <CardTitle className="text-xl font-bold text-gray-100 mb-2">{itinerary.title}</CardTitle>
+                    <CardDescription className="text-gray-300 mb-4">{itinerary.description}</CardDescription>
+                    <div className="flex items-center text-gray-400 mb-2">
                       <Clock className="w-4 h-4 mr-2" />
                       <span>{itinerary.duration}</span>
                     </div>
-                    <div className="flex items-center mt-2 text-rose-700">
+                    <div className="flex items-center text-gray-400">
                       <MapPin className="w-4 h-4 mr-2" />
                       <span>{itinerary.location}</span>
                     </div>
                   </CardContent>
-                  <CardFooter>
+                  <CardFooter className="p-6 pt-0">
                     <Button 
-                      className="w-full bg-rose-600 text-white hover:bg-rose-700"
+                      className="w-full bg-yellow-500 text-gray-900 hover:bg-yellow-400 transition-colors"
                       onClick={() => handleBooking(itinerary)}
                     >
-                      Book This Date
+                      Reserve This Experience
                     </Button>
                   </CardFooter>
                 </Card>
@@ -143,16 +178,23 @@ export default function Component() {
           </div>
         </section>
       </main>
-      <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t bg-white">
-        <p className="text-xs text-rose-500">© 2024 rotterdate.nl. All rights reserved.</p>
-        <nav className="sm:ml-auto flex gap-4 sm:gap-6">
-          <Link className="text-xs hover:underline underline-offset-4 text-rose-600" href="#">
-            Terms of Service
-          </Link>
-          <Link className="text-xs hover:underline underline-offset-4 text-rose-600" href="#">
-            Privacy
-          </Link>
-        </nav>
+      <footer className="py-8 w-full shrink-0 bg-gray-900 border-t border-gray-800">
+        <div className="container px-4 md:px-6">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <p className="text-sm text-gray-400 mb-4 md:mb-0">© 2024 rotterdate.nl. All rights reserved.</p>
+            <nav className="flex gap-6">
+              <Link className="text-sm hover:text-yellow-500 text-gray-400 transition-colors" href="#">
+                Terms of Service
+              </Link>
+              <Link className="text-sm hover:text-yellow-500 text-gray-400 transition-colors" href="#">
+                Privacy Policy
+              </Link>
+              <Link className="text-sm hover:text-yellow-500 text-gray-400 transition-colors" href="#">
+                Contact Us
+              </Link>
+            </nav>
+          </div>
+        </div>
       </footer>
     </div>
   )
