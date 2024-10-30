@@ -44,9 +44,8 @@ const itineraries: Itinerary[] = [
 ]
 
 export default function Component() {
-  const [selectedItinerary, setSelectedItinerary] = useState<Itinerary | null>(null)
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
   const [scrollPosition, setScrollPosition] = useState<number>(0)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -58,7 +57,6 @@ export default function Component() {
   }, [])
 
   const handleBooking = (itinerary: Itinerary) => {
-    setSelectedItinerary(itinerary)
     alert(`Booking ${itinerary.title}. In a real app, this would open a booking form.`)
   }
 
