@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',  // Required for static site generation
-  basePath: '/rotterdate', // Replace with your repository name
+  basePath: '',      // Empty if using custom domain
   images: {
-    unoptimized: true, // Required for static export
+    unoptimized: true,
   },
 }
 
