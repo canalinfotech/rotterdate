@@ -163,10 +163,10 @@ export default function Component() {
           <span className="ml-2 text-xl font-bold">Rotterdate</span>
         </Link>
         <nav className="hidden md:flex ml-auto gap-6 sm:gap-8">
-          <button onClick={scrollToExperiences} className="text-sm font-medium hover:text-yellow-500 transition-colors">
+          <button onClick={scrollToExperiences} className="text-sm font-medium hover:text-yellow-500 transition-colors rounded-full px-4 py-2">
             Experiences
           </button>
-          <button onClick={scrollToProcess} className="text-sm font-medium hover:text-yellow-500 transition-colors">
+          <button onClick={scrollToProcess} className="text-sm font-medium hover:text-yellow-500 transition-colors rounded-full px-4 py-2">
             Our Process
           </button>
         </nav>
@@ -186,7 +186,7 @@ export default function Component() {
                 scrollToExperiences()
                 setIsMenuOpen(false)
               }} 
-              className="text-xl font-medium hover:text-yellow-500 transition-colors"
+              className="text-xl font-medium hover:text-yellow-500 transition-colors rounded-full px-6 py-2"
             >
               Experiences
             </button>
@@ -195,7 +195,7 @@ export default function Component() {
                 scrollToProcess()
                 setIsMenuOpen(false)
               }} 
-              className="text-xl font-medium hover:text-yellow-500 transition-colors"
+              className="text-xl font-medium hover:text-yellow-500 transition-colors rounded-full px-6 py-2"
             >
               Our Process
             </button>
@@ -238,14 +238,14 @@ export default function Component() {
             </p>
             <div className="space-x-4 animate-fade-up animate-delay-300">
               <Button 
-                className="bg-yellow-500 text-gray-900 hover:bg-yellow-400"
+                className="bg-yellow-500 text-gray-900 hover:bg-yellow-400 transition-colors rounded-full"
                 onClick={scrollToExperiences}
               >
                 Explore Experiences
               </Button>
               <Button 
                 variant="outline" 
-                className="border-gray-300 text-gray-300 hover:bg-gray-800"
+                className="border-gray-300 text-gray-300 hover:bg-gray-800 transition-colors rounded-full"
                 onClick={scrollToProcess}
               >
                 Our Process
@@ -308,7 +308,7 @@ export default function Component() {
                   </CardContent>
                   <CardFooter className="p-4">
                     <Link href={`/itinerary/${itinerary.id}`} className="w-full">
-                      <Button className="w-full bg-yellow-500 text-gray-900 hover:bg-yellow-400 transition-colors">
+                      <Button className="w-full bg-yellow-500 text-gray-900 hover:bg-yellow-400 transition-colors rounded-full font-medium">
                         Book now
                       </Button>
                     </Link>
