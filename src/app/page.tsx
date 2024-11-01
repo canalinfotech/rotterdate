@@ -5,7 +5,7 @@ import Link from "next/link"
 import Image from 'next/image'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Clock, MapPin, Star, Menu, Coffee, LandmarkIcon, Utensils, Footprints, Wine } from "lucide-react"
+import { Clock, MapPin, Star, Menu, Coffee, LandmarkIcon, Utensils, Footprints, Wine, Activity, Flower, Building, ShoppingBag, Music } from "lucide-react"
 import { LucideIcon } from 'lucide-react'
 
 interface Activity {
@@ -73,6 +73,55 @@ const itineraries: Itinerary[] = [
       { icon: Wine, name: "Craft Cocktails", duration: "1.5 hours" }
     ],
     image: "/art-gallery.jpg?height=400&width=600"
+  }, {
+    id: 4,
+    title: "Romantic City Explorer",
+    description: "A perfect blend of culture, cuisine, and relaxation in the heart of Rotterdam.",
+    duration: "6 hours",
+    day: "Saturday",
+    date: "2024-06-15",
+    timeperiod: "10:00 AM - 4:00 PM",
+    activities: [
+      { icon: Coffee, name: "Artisanal Coffee Tasting", duration: "1 hour" },
+      { icon: LandmarkIcon, name: "Modern Art Museum Tour", duration: "2 hours" },
+      { icon: Utensils, name: "Gourmet Lunch Experience", duration: "1.5 hours" },
+      { icon: Footprints, name: "Scenic Harbor Walk", duration: "1 hour" },
+      { icon: Wine, name: "Wine & Cheese Pairing", duration: "30 minutes" }
+    ],
+    image: "/city-explorer.webp?height=400&width=600"
+  },
+  {
+    id: 5,
+    title: "Urban Adventure & Relaxation",
+    description: "Discover Rotterdam's vibrant culture and unwind with luxurious experiences.",
+    duration: "5 hours",
+    day: "Sunday",
+    date: "2024-06-16",
+    timeperiod: "2:00 PM - 7:00 PM",
+    activities: [
+      { icon: Activity, name: "Guided City Jogging Tour", duration: "1 hour" },
+      { icon: Flower, name: "Botanical Garden Visit", duration: "1.5 hours" },
+      { icon: Utensils, name: "Farm-to-Table Brunch", duration: "1 hour" },
+      { icon: Building, name: "Rooftop Bar Cocktail Masterclass", duration: "1.5 hours" }
+    ],
+    image: "/placeholder.svg?height=400&width=600"
+  },
+  {
+    id: 6,
+    title: "Culinary & Cultural Delights",
+    description: "Indulge in Rotterdam's finest flavors and artistic treasures.",
+    duration: "7 hours",
+    day: "Friday",
+    date: "2024-06-14",
+    timeperiod: "3:00 PM - 10:00 PM",
+    activities: [
+      { icon: Coffee, name: "Specialty Coffee Workshop", duration: "1 hour" },
+      { icon: ShoppingBag, name: "Local Artisan Market Tour", duration: "2 hours" },
+      { icon: Utensils, name: "Michelin Star Lunch", duration: "2 hours" },
+      { icon: LandmarkIcon, name: "Private Gallery Exhibition", duration: "1 hour" },
+      { icon: Music, name: "Jazz Club Evening", duration: "1 hour" }
+    ],
+    image: "/placeholder.svg?height=400&width=600"
   }
 ]
 
@@ -93,9 +142,8 @@ export default function Component() {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-900 text-gray-100">
-      <header className={`fixed w-full px-4 lg:px-6 h-20 flex items-center transition-all duration-300 z-50 ${
-        scrollPosition > 50 ? 'bg-gray-900 shadow-lg' : 'bg-transparent'
-      }`}>
+      <header className={`fixed w-full px-4 lg:px-6 h-20 flex items-center transition-all duration-300 z-50 ${scrollPosition > 50 ? 'bg-gray-900 shadow-lg' : 'bg-transparent'
+        }`}>
         <Link className="flex items-center justify-center" href="#">
           <Star className="h-8 w-8 text-yellow-500" />
           <span className="ml-2 text-2xl font-bold">Rotterdate</span>
@@ -114,9 +162,9 @@ export default function Component() {
             Contact
           </Link>
         </nav>
-        <Button 
-          variant="ghost" 
-          className="md:hidden ml-auto" 
+        <Button
+          variant="ghost"
+          className="md:hidden ml-auto"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           <Menu className="h-6 w-6" />
@@ -138,9 +186,9 @@ export default function Component() {
               Contact
             </Link>
           </nav>
-          <Button 
-            variant="ghost" 
-            className="absolute top-4 right-4" 
+          <Button
+            variant="ghost"
+            className="absolute top-4 right-4"
             onClick={() => setIsMenuOpen(false)}
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
@@ -150,7 +198,7 @@ export default function Component() {
       <main className="flex-1">
         <section className="relative w-full h-screen flex items-center justify-center">
           {/* Background image with opacity control */}
-          <div 
+          <div
             className="absolute inset-0 z-0"
             style={{
               backgroundImage: "url('/background.webp')",
@@ -161,7 +209,7 @@ export default function Component() {
           />
           {/* Dark overlay for better text readability */}
           <div className="absolute inset-0 bg-black opacity-60 z-10" />
-          
+
           {/* Content */}
           <div className="container px-4 md:px-6 text-center relative z-20">
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl/none mb-6">
@@ -181,11 +229,11 @@ export default function Component() {
         <section className="w-full py-12 md:py-16 bg-gray-800">
           <div className="container px-4 md:px-6">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-gray-100 mb-12 text-center">
-              Exclusive Date Experiences
+              We got you covered!
             </h2>
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {itineraries.map((itinerary, index) => (
-                <Card key={itinerary.id} className="flex flex-col overflow-hidden border-0 shadow-lg bg-gray-700 hover:shadow-xl transition-shadow duration-300 animate-fade-up" style={{animationDelay: `${index * 150}ms`}}>
+                <Card key={itinerary.id} className="flex flex-col overflow-hidden border-0 shadow-lg bg-gray-700 hover:shadow-xl transition-shadow duration-300 animate-fade-up" style={{ animationDelay: `${index * 150}ms` }}>
                   <CardHeader className="p-0">
                     <Image
                       src={itinerary.image}
@@ -223,7 +271,7 @@ export default function Component() {
                   </CardContent>
                   <CardFooter className="p-6 pt-0">
                     <Link href={`/itinerary/${itinerary.id}`} className="w-full">
-                      <Button 
+                      <Button
                         className="w-full bg-yellow-500 text-gray-900 hover:bg-yellow-400 transition-colors"
                       >
                         View & Book (€1)
