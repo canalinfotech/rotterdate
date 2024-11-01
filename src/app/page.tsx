@@ -6,9 +6,10 @@ import Image from 'next/image'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Clock, MapPin, Star, Menu, Coffee, LandmarkIcon, Utensils, Footprints, Wine } from "lucide-react"
+import { LucideIcon } from 'lucide-react'
 
 interface Activity {
-  icon: any;  // Using 'any' for Lucide icons
+  icon: LucideIcon;
   name: string;
   duration: string;
 }
@@ -89,10 +90,6 @@ export default function Component() {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
-
-  const handleBooking = (itinerary: Itinerary) => {
-    alert(`Booking ${itinerary.title}. In a real app, this would open a booking form.`)
-  }
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-900 text-gray-100">
