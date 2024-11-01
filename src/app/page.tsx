@@ -255,14 +255,14 @@ export default function Component() {
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {itineraries.map((itinerary, index) => (
                 <Card key={itinerary.id} className="flex flex-col overflow-hidden border-0 shadow-lg bg-gray-700 hover:shadow-xl transition-shadow duration-300 animate-fade-up relative" style={{ animationDelay: `${index * 150}ms` }}>
-                  {/* Image container without padding */}
-                  <div className="relative w-full">
+                  {/* Image container with overflow hidden to contain zoom effect */}
+                  <div className="relative w-full overflow-hidden">
                     <Image
                       src={itinerary.image}
                       alt={itinerary.title}
                       width={600}
                       height={400}
-                      className="w-full h-64 object-cover"
+                      className="w-full h-64 object-cover transition-transform duration-500 ease-in-out hover:scale-110"
                     />
                     
                     {/* Activities badges overlapping the image */}
