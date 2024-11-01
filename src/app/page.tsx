@@ -153,7 +153,13 @@ export default function Component() {
       <header className={`fixed w-full px-4 lg:px-6 h-16 flex items-center transition-all duration-300 z-50 ${scrollPosition > 50 ? 'bg-gray-900 shadow-lg' : 'bg-transparent'
         }`}>
         <Link className="flex items-center justify-center" href="#">
-          <Star className="h-6 w-6 text-yellow-500" />
+          <Image
+            src="/rotterdate-logo-new.png"
+            alt="Rotterdate Logo"
+            width={100}
+            height={30}
+            className="h-6 w-auto"
+          />
           <span className="ml-2 text-xl font-bold">Rotterdate</span>
         </Link>
         <nav className="hidden md:flex ml-auto gap-6 sm:gap-8">
