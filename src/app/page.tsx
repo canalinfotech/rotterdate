@@ -5,7 +5,7 @@ import Link from "next/link"
 import Image from 'next/image'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Clock, MapPin, Star, Menu, Coffee, LandmarkIcon, Utensils, Footprints, Wine, Activity, Flower, Building, ShoppingBag, Music } from "lucide-react"
+import { Clock, MapPin, Star, Menu, Coffee, LandmarkIcon, Utensils, Footprints, Wine, Activity, Flower, Building, ShoppingBag, Music, Calendar, PhoneCall, Bell } from "lucide-react"
 import { LucideIcon } from 'lucide-react'
 
 interface Activity {
@@ -249,7 +249,11 @@ export default function Component() {
                     <div className="space-y-2 mb-4">
                       <div className="flex items-center text-gray-400">
                         <Clock className="w-4 h-4 mr-2" />
-                        <span>{itinerary.day}, {new Date(itinerary.date).toLocaleDateString()}</span>
+                        <span>{itinerary.day}, {new Date(itinerary.date).toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: 'numeric',
+                          day: 'numeric'
+                        })}</span>
                       </div>
                       <div className="flex items-center text-gray-400">
                         <Clock className="w-4 h-4 mr-2" />
@@ -283,25 +287,67 @@ export default function Component() {
             </div>
           </div>
         </section>
-      </main>
-      <footer className="py-8 w-full shrink-0 bg-gray-900 border-t border-gray-800">
-        <div className="container px-4 md:px-6">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-sm text-gray-400 mb-4 md:mb-0">© 2024 Rotterdate.nl. All rights reserved.</p>
-            <nav className="flex gap-6">
-              <Link className="text-sm hover:text-yellow-500 text-gray-400 transition-colors" href="#">
-                Terms of Service
-              </Link>
-              <Link className="text-sm hover:text-yellow-500 text-gray-400 transition-colors" href="#">
-                Privacy Policy
-              </Link>
-              <Link className="text-sm hover:text-yellow-500 text-gray-400 transition-colors" href="#">
-                Contact Us
-              </Link>
-            </nav>
+        <section id="our-process" className="w-full py-12 md:py-24 bg-gray-900">
+          <div className="container px-4 md:px-6">
+            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-gray-100 mb-12 text-center">
+              Our Process
+            </h2>
+            <div className="grid gap-8 md:grid-cols-3">
+              <Card className="bg-gray-800 border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <CardHeader>
+                  <Calendar className="w-12 h-12 text-yellow-500 mb-4" />
+                  <CardTitle className="text-xl font-bold text-gray-100">Prepare Your Agenda</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-300">
+                    We'll prepare a detailed agenda for your date, send it via email, and update your calendar to ensure you're all set for a perfect evening.
+                  </p>
+                </CardContent>
+              </Card>
+              <Card className="bg-gray-800 border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <CardHeader>
+                  <PhoneCall className="w-12 h-12 text-yellow-500 mb-4" />
+                  <CardTitle className="text-xl font-bold text-gray-100">Make Reservations</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-300">
+                    We'll handle all necessary reservations on your behalf, ensuring a smooth and hassle-free experience at each venue.
+                  </p>
+                </CardContent>
+              </Card>
+              <Card className="bg-gray-800 border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <CardHeader>
+                  <Bell className="w-12 h-12 text-yellow-500 mb-4" />
+                  <CardTitle className="text-xl font-bold text-gray-100">Timely Notifications</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-300">
+                    We'll send you notifications before and during your date to keep you on track, ensuring you have the best possible time.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
           </div>
-        </div>
-      </footer>
+        </section>
+        <footer className="py-8 w-full shrink-0 bg-gray-900 border-t border-gray-800">
+          <div className="container px-4 md:px-6">
+            <div className="flex flex-col md:flex-row justify-between items-center">
+              <p className="text-sm text-gray-400 mb-4 md:mb-0">© 2024 Rotterdate.nl. All rights reserved.</p>
+              <nav className="flex gap-6">
+                <Link className="text-sm hover:text-yellow-500 text-gray-400 transition-colors" href="#">
+                  Terms of Service
+                </Link>
+                <Link className="text-sm hover:text-yellow-500 text-gray-400 transition-colors" href="#">
+                  Privacy Policy
+                </Link>
+                <Link className="text-sm hover:text-yellow-500 text-gray-400 transition-colors" href="#">
+                  Contact Us
+                </Link>
+              </nav>
+            </div>
+          </div>
+        </footer>
+      </main>
     </div>
   )
 }
