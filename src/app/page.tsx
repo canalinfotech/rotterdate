@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Clock, MapPin, Star, Menu, Coffee, LandmarkIcon, Utensils, Footprints, Wine, Activity, Flower, Building, ShoppingBag, Music, Calendar, PhoneCall, Bell } from "lucide-react"
 import { LucideIcon } from 'lucide-react'
+import { useRouter } from 'next/navigation'
 
 interface Activity {
   icon: LucideIcon;
@@ -130,6 +131,7 @@ const itineraries: Itinerary[] = [
 export default function Component() {
   const [scrollPosition, setScrollPosition] = useState<number>(0)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const router = useRouter()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -139,6 +141,10 @@ export default function Component() {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  const scrollToProcess = () => {
+    document.getElementById('our-process')?.scrollIntoView({ behavior: 'smooth' })
+  }
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-900 text-gray-100">
@@ -155,9 +161,9 @@ export default function Component() {
           <Link className="text-sm font-medium hover:text-yellow-500 transition-colors" href="#">
             Experiences
           </Link>
-          <Link className="text-sm font-medium hover:text-yellow-500 transition-colors" href="#">
-            About
-          </Link>
+          <button onClick={scrollToProcess} className="text-sm font-medium hover:text-yellow-500 transition-colors">
+            Our Process
+          </button>
           <Link className="text-sm font-medium hover:text-yellow-500 transition-colors" href="#">
             Contact
           </Link>
@@ -179,9 +185,15 @@ export default function Component() {
             <Link className="text-xl font-medium hover:text-yellow-500 transition-colors" href="#" onClick={() => setIsMenuOpen(false)}>
               Experiences
             </Link>
-            <Link className="text-xl font-medium hover:text-yellow-500 transition-colors" href="#" onClick={() => setIsMenuOpen(false)}>
-              About
-            </Link>
+            <button 
+              onClick={() => {
+                scrollToProcess()
+                setIsMenuOpen(false)
+              }} 
+              className="text-xl font-medium hover:text-yellow-500 transition-colors"
+            >
+              Our Process
+            </button>
             <Link className="text-xl font-medium hover:text-yellow-500 transition-colors" href="#" onClick={() => setIsMenuOpen(false)}>
               Contact
             </Link>
@@ -220,7 +232,11 @@ export default function Component() {
             </p>
             <div className="space-x-4">
               <Button className="bg-yellow-500 text-gray-900 hover:bg-yellow-400">Explore Experiences</Button>
-              <Button variant="outline" className="border-gray-300 text-gray-300 hover:bg-gray-800">
+              <Button 
+                variant="outline" 
+                className="border-gray-300 text-gray-300 hover:bg-gray-800"
+                onClick={scrollToProcess}
+              >
                 Our Process
               </Button>
             </div>
