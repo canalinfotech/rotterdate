@@ -5,24 +5,42 @@ import Link from "next/link"
 import Image from 'next/image'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Clock, MapPin, Star, Menu } from "lucide-react"
+import { Clock, MapPin, Star, Menu, Coffee, LandmarkIcon, Utensils, Footprints, Wine } from "lucide-react"
+
+interface Activity {
+  icon: any;  // Using 'any' for Lucide icons
+  name: string;
+  duration: string;
+}
 
 interface Itinerary {
-  id: number
-  title: string
-  description: string
-  duration: string
-  location: string
-  image: string
+  id: number;
+  title: string;
+  description: string;
+  duration: string;
+  day: string;
+  date: string;
+  timeperiod: string;
+  activities: Activity[];
+  image: string;
 }
 
 const itineraries: Itinerary[] = [
   {
     id: 1,
-    title: "Michelin Star Dining Experience",
-    description: "Indulge in an exquisite 7-course tasting menu at Rotterdam's finest Michelin-starred restaurant.",
-    duration: "3 hours",
-    location: "City Center",
+    title: "Romantic City Explorer",
+    description: "A perfect blend of culture, cuisine, and relaxation in the heart of Rotterdam.",
+    duration: "6 hours",
+    day: "Saturday",
+    date: "2024-06-15",
+    timeperiod: "10:00 AM - 4:00 PM",
+    activities: [
+      { icon: Coffee, name: "Artisanal Coffee Tasting", duration: "1 hour" },
+      { icon: LandmarkIcon, name: "Modern Art Museum Tour", duration: "2 hours" },
+      { icon: Utensils, name: "Gourmet Lunch Experience", duration: "1.5 hours" },
+      { icon: Footprints, name: "Scenic Harbor Walk", duration: "1 hour" },
+      { icon: Wine, name: "Wine & Cheese Pairing", duration: "30 minutes" }
+    ],
     image: "/5-star-dining.jpg?height=400&width=600"
   },
   {
@@ -30,7 +48,15 @@ const itineraries: Itinerary[] = [
     title: "Private Yacht Sunset Cruise",
     description: "Enjoy a luxurious private yacht cruise along the Maas River with champagne and gourmet hors d'oeuvres.",
     duration: "4 hours",
-    location: "Rotterdam Harbor",
+    day: "Sunday",
+    date: "2024-06-16",
+    timeperiod: "2:00 PM - 6:00 PM",
+    activities: [
+      { icon: Wine, name: "Champagne Tasting", duration: "1 hour" },
+      { icon: Utensils, name: "Gourmet Hors d'oeuvres", duration: "1.5 hours" },
+      { icon: Footprints, name: "Scenic Harbor Walk", duration: "1 hour" },
+      { icon: Wine, name: "Wine & Cheese Pairing", duration: "30 minutes" }
+    ],
     image: "/private-yacht.jpg?height=400&width=600"
   },
   {
@@ -38,7 +64,13 @@ const itineraries: Itinerary[] = [
     title: "VIP Art Gallery Tour & Cocktails",
     description: "Experience an after-hours, curator-led tour of Rotterdam's most exclusive art galleries, followed by craft cocktails.",
     duration: "3 hours",
-    location: "Arts District",
+    day: "Monday",
+    date: "2024-06-17",
+    timeperiod: "11:00 AM - 2:00 PM",
+    activities: [
+      { icon: LandmarkIcon, name: "Art Gallery Tour", duration: "1.5 hours" },
+      { icon: Wine, name: "Craft Cocktails", duration: "1.5 hours" }
+    ],
     image: "/art-gallery.jpg?height=400&width=600"
   }
 ]
@@ -141,8 +173,8 @@ export default function Component() {
               Exclusive Date Experiences
             </h2>
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {itineraries.map((itinerary) => (
-                <Card key={itinerary.id} className="flex flex-col overflow-hidden border-0 shadow-lg bg-gray-700 hover:shadow-xl transition-shadow duration-300">
+              {itineraries.map((itinerary, index) => (
+                <Card key={itinerary.id} className="flex flex-col overflow-hidden border-0 shadow-lg bg-gray-700 hover:shadow-xl transition-shadow duration-300 animate-fade-up" style={{animationDelay: `${index * 150}ms`}}>
                   <CardHeader className="p-0">
                     <Image
                       src={itinerary.image}
@@ -155,22 +187,37 @@ export default function Component() {
                   <CardContent className="flex-grow p-6">
                     <CardTitle className="text-xl font-bold text-gray-100 mb-2">{itinerary.title}</CardTitle>
                     <CardDescription className="text-gray-300 mb-4">{itinerary.description}</CardDescription>
-                    <div className="flex items-center text-gray-400 mb-2">
-                      <Clock className="w-4 h-4 mr-2" />
-                      <span>{itinerary.duration}</span>
+                    <div className="space-y-2 mb-4">
+                      <div className="flex items-center text-gray-400">
+                        <Clock className="w-4 h-4 mr-2" />
+                        <span>{itinerary.day}, {new Date(itinerary.date).toLocaleDateString()}</span>
+                      </div>
+                      <div className="flex items-center text-gray-400">
+                        <Clock className="w-4 h-4 mr-2" />
+                        <span>{itinerary.timeperiod}</span>
+                      </div>
+                      <div className="flex items-center text-gray-400">
+                        <MapPin className="w-4 h-4 mr-2" />
+                        <span>Duration: {itinerary.duration}</span>
+                      </div>
                     </div>
-                    <div className="flex items-center text-gray-400">
-                      <MapPin className="w-4 h-4 mr-2" />
-                      <span>{itinerary.location}</span>
+                    <div className="flex flex-wrap gap-2 mt-4">
+                      {itinerary.activities.map((activity, index) => (
+                        <div key={index} className="flex items-center bg-gray-600 rounded-full px-3 py-1 text-xs">
+                          <activity.icon className="w-3 h-3 mr-1" />
+                          <span>{activity.name}</span>
+                        </div>
+                      ))}
                     </div>
                   </CardContent>
                   <CardFooter className="p-6 pt-0">
-                    <Button 
-                      className="w-full bg-yellow-500 text-gray-900 hover:bg-yellow-400 transition-colors"
-                      onClick={() => handleBooking(itinerary)}
-                    >
-                      Reserve This Experience
-                    </Button>
+                    <Link href={`/itinerary/${itinerary.id}`} className="w-full">
+                      <Button 
+                        className="w-full bg-yellow-500 text-gray-900 hover:bg-yellow-400 transition-colors"
+                      >
+                        View & Book (€1)
+                      </Button>
+                    </Link>
                   </CardFooter>
                 </Card>
               ))}
