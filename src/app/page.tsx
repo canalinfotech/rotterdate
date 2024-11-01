@@ -255,28 +255,30 @@ export default function Component() {
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {itineraries.map((itinerary, index) => (
                 <Card key={itinerary.id} className="flex flex-col overflow-hidden border-0 shadow-lg bg-gray-700 hover:shadow-xl transition-shadow duration-300 animate-fade-up relative" style={{ animationDelay: `${index * 150}ms` }}>
-                  {/* Activities badges overlapping the image */}
-                  <div className="absolute left-6 top-6 z-10 flex flex-col gap-2">
-                    {itinerary.activities.map((activity, index) => (
-                      <div 
-                        key={index} 
-                        className="flex items-center bg-gray-600 rounded-full px-3 py-1 text-xs backdrop-blur-sm bg-opacity-90"
-                      >
-                        <activity.icon className="w-3 h-3 mr-1 text-yellow-500" />
-                        <span className="text-white">{activity.name}</span>
-                      </div>
-                    ))}
-                  </div>
-                  
-                  <CardHeader className="p-0">
+                  {/* Image container without padding */}
+                  <div className="relative w-full">
                     <Image
                       src={itinerary.image}
                       alt={itinerary.title}
                       width={600}
                       height={400}
-                      className="w-full h-64 object-cover transition-transform duration-300 hover:scale-105"
+                      className="w-full h-64 object-cover"
                     />
-                  </CardHeader>
+                    
+                    {/* Activities badges overlapping the image */}
+                    <div className="absolute left-4 top-4 right-4 z-10 flex flex-col gap-2">
+                      {itinerary.activities.map((activity, index) => (
+                        <div 
+                          key={index} 
+                          className="flex items-center bg-gray-600 rounded-full px-3 py-1.5 text-xs backdrop-blur-sm bg-opacity-90 w-fit"
+                        >
+                          <activity.icon className="w-3 h-3 mr-2 text-yellow-500" />
+                          <span className="text-white">{activity.name}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  
                   <CardContent className="flex-grow p-4">
                     <CardTitle className="text-xl font-bold text-gray-100 mb-2">{itinerary.title}</CardTitle>
                     <div className="space-y-2">
