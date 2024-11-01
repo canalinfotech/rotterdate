@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from "next/link"
 import Image from 'next/image'
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Clock, MapPin, Star, Menu, Coffee, LandmarkIcon, Utensils, Footprints, Wine, Activity, Flower, Building, ShoppingBag, Music, Calendar, PhoneCall, Bell } from "lucide-react"
 import { LucideIcon } from 'lucide-react'
 
@@ -220,13 +220,17 @@ export default function Component() {
 
           {/* Content */}
           <div className="container px-4 md:px-6 text-center relative z-20">
-            <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl/none mb-6">
-              Perfect Date Night in Rotterdam
-            </h1>
-            <p className="mx-auto max-w-[700px] text-gray-300 md:text-xl mb-8">
+            <div className="animate-fade-up">
+              <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl mb-6">
+                <span className="text-yellow-500">Perfect Date</span>{" "}
+                <span className="text-white">night in</span>{" "}
+                <span className="text-yellow-500">Rotterdam</span>
+              </h1>
+            </div>
+            <p className="mx-auto max-w-[700px] text-gray-300 md:text-xl mb-8 animate-fade-up animate-delay-150">
               Curated, luxurious experiences for discerning couples. Effortlessly plan and book your perfect evening.
             </p>
-            <div className="space-x-4">
+            <div className="space-x-4 animate-fade-up animate-delay-300">
               <Button 
                 className="bg-yellow-500 text-gray-900 hover:bg-yellow-400"
                 onClick={scrollToExperiences}
@@ -273,9 +277,8 @@ export default function Component() {
                       className="w-full h-64 object-cover transition-transform duration-300 hover:scale-105"
                     />
                   </CardHeader>
-                  <CardContent className="flex-grow p-6">
+                  <CardContent className="flex-grow p-4">
                     <CardTitle className="text-xl font-bold text-gray-100 mb-2">{itinerary.title}</CardTitle>
-                    <CardDescription className="text-gray-300 mb-4">{itinerary.description}</CardDescription>
                     <div className="space-y-2">
                       <div className="flex items-center text-gray-400">
                         <Clock className="w-4 h-4 mr-2" />
@@ -295,12 +298,10 @@ export default function Component() {
                       </div>
                     </div>
                   </CardContent>
-                  <CardFooter className="p-6 pt-0">
+                  <CardFooter className="p-4">
                     <Link href={`/itinerary/${itinerary.id}`} className="w-full">
-                      <Button
-                        className="w-full bg-yellow-500 text-gray-900 hover:bg-yellow-400 transition-colors"
-                      >
-                        View & Book (€1)
+                      <Button className="w-full bg-yellow-500 text-gray-900 hover:bg-yellow-400 transition-colors">
+                        Book now
                       </Button>
                     </Link>
                   </CardFooter>
