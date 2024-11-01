@@ -5,7 +5,7 @@ import Link from "next/link"
 import Image from 'next/image'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Clock, MapPin, Star, Menu, Coffee, LandmarkIcon, Utensils, Footprints, Wine, Activity, Flower, Building, ShoppingBag, Music, Calendar, PhoneCall, Bell } from "lucide-react"
+import { Clock, MapPin, Menu, Coffee, LandmarkIcon, Utensils, Footprints, Wine, Activity, Flower, Building, ShoppingBag, Music, Calendar, PhoneCall, Bell } from "lucide-react"
 import { LucideIcon } from 'lucide-react'
 
 interface Activity {
