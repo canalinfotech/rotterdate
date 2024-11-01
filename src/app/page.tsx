@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Clock, MapPin, Star, Menu, Coffee, LandmarkIcon, Utensils, Footprints, Wine, Activity, Flower, Building, ShoppingBag, Music, Calendar, PhoneCall, Bell } from "lucide-react"
 import { LucideIcon } from 'lucide-react'
-import { useRouter } from 'next/navigation'
 
 interface Activity {
   icon: LucideIcon;
@@ -131,7 +130,6 @@ const itineraries: Itinerary[] = [
 export default function Component() {
   const [scrollPosition, setScrollPosition] = useState<number>(0)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const router = useRouter()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -148,10 +146,6 @@ export default function Component() {
 
   const scrollToExperiences = () => {
     document.getElementById('experiences')?.scrollIntoView({ behavior: 'smooth' })
-  }
-
-  const scrollToHome = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   return (
