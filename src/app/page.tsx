@@ -317,7 +317,7 @@ export default function Component() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-300">
-                    We'll prepare a detailed agenda for your date, send it via email, and update your calendar to ensure you're all set for a perfect evening.
+                    We&apos;ll prepare a detailed agenda for your date, send it via email, and update your calendar to ensure you&apos;re all set for a perfect evening.
                   </p>
                 </CardContent>
               </Card>
@@ -328,7 +328,7 @@ export default function Component() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-300">
-                    We'll handle all necessary reservations on your behalf, ensuring a smooth and hassle-free experience at each venue.
+                    We&apos;ll handle all necessary reservations on your behalf, ensuring a smooth and hassle-free experience at each venue.
                   </p>
                 </CardContent>
               </Card>
@@ -339,7 +339,7 @@ export default function Component() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-300">
-                    We'll send you notifications before and during your date to keep you on track, ensuring you have the best possible time.
+                    We&apos;ll send you notifications before and during your date to keep you on track, ensuring you have the best possible time.
                   </p>
                 </CardContent>
               </Card>
