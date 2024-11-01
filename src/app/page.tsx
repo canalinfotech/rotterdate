@@ -151,10 +151,24 @@ export default function Component() {
         </div>
       )}
       <main className="flex-1">
-        <section className="w-full h-screen flex items-center justify-center bg-[url('/placeholder.svg?height=1080&width=1920')] bg-cover bg-center">
-          <div className="container px-4 md:px-6 text-center">
+        <section className="relative w-full h-screen flex items-center justify-center">
+          {/* Background image with opacity control */}
+          <div 
+            className="absolute inset-0 z-0"
+            style={{
+              backgroundImage: "url('/background.webp')",
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              opacity: 0.5  // Adjust this value between 0 and 1
+            }}
+          />
+          {/* Dark overlay for better text readability */}
+          <div className="absolute inset-0 bg-black opacity-60 z-10" />
+          
+          {/* Content */}
+          <div className="container px-4 md:px-6 text-center relative z-20">
             <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl/none mb-6">
-              Elevate Your Date Night in Rotterdam
+              Perfect Date Night in Rotterdam
             </h1>
             <p className="mx-auto max-w-[700px] text-gray-300 md:text-xl mb-8">
               Curated, luxurious experiences for discerning couples. Effortlessly plan and book your perfect evening.
@@ -167,7 +181,7 @@ export default function Component() {
             </div>
           </div>
         </section>
-        <section className="w-full py-20 md:py-32 bg-gray-800">
+        <section className="w-full py-12 md:py-16 bg-gray-800">
           <div className="container px-4 md:px-6">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-gray-100 mb-12 text-center">
               Exclusive Date Experiences
