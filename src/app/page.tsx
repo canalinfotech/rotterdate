@@ -146,27 +146,29 @@ export default function Component() {
     document.getElementById('our-process')?.scrollIntoView({ behavior: 'smooth' })
   }
 
+  const scrollToExperiences = () => {
+    document.getElementById('experiences')?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  const scrollToHome = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   return (
     <div className="flex flex-col min-h-screen bg-gray-900 text-gray-100">
-      <header className={`fixed w-full px-4 lg:px-6 h-20 flex items-center transition-all duration-300 z-50 ${scrollPosition > 50 ? 'bg-gray-900 shadow-lg' : 'bg-transparent'
+      <header className={`fixed w-full px-4 lg:px-6 h-16 flex items-center transition-all duration-300 z-50 ${scrollPosition > 50 ? 'bg-gray-900 shadow-lg' : 'bg-transparent'
         }`}>
         <Link className="flex items-center justify-center" href="#">
-          <Star className="h-8 w-8 text-yellow-500" />
-          <span className="ml-2 text-2xl font-bold">Rotterdate</span>
+          <Star className="h-6 w-6 text-yellow-500" />
+          <span className="ml-2 text-xl font-bold">Rotterdate</span>
         </Link>
         <nav className="hidden md:flex ml-auto gap-6 sm:gap-8">
-          <Link className="text-sm font-medium hover:text-yellow-500 transition-colors" href="#">
-            Home
-          </Link>
-          <Link className="text-sm font-medium hover:text-yellow-500 transition-colors" href="#">
+          <button onClick={scrollToExperiences} className="text-sm font-medium hover:text-yellow-500 transition-colors">
             Experiences
-          </Link>
+          </button>
           <button onClick={scrollToProcess} className="text-sm font-medium hover:text-yellow-500 transition-colors">
             Our Process
           </button>
-          <Link className="text-sm font-medium hover:text-yellow-500 transition-colors" href="#">
-            Contact
-          </Link>
         </nav>
         <Button
           variant="ghost"
@@ -179,12 +181,15 @@ export default function Component() {
       {isMenuOpen && (
         <div className="fixed inset-0 bg-gray-900 z-40 flex flex-col items-center justify-center">
           <nav className="flex flex-col gap-6 text-center">
-            <Link className="text-xl font-medium hover:text-yellow-500 transition-colors" href="#" onClick={() => setIsMenuOpen(false)}>
-              Home
-            </Link>
-            <Link className="text-xl font-medium hover:text-yellow-500 transition-colors" href="#" onClick={() => setIsMenuOpen(false)}>
+            <button 
+              onClick={() => {
+                scrollToExperiences()
+                setIsMenuOpen(false)
+              }} 
+              className="text-xl font-medium hover:text-yellow-500 transition-colors"
+            >
               Experiences
-            </Link>
+            </button>
             <button 
               onClick={() => {
                 scrollToProcess()
@@ -194,9 +199,6 @@ export default function Component() {
             >
               Our Process
             </button>
-            <Link className="text-xl font-medium hover:text-yellow-500 transition-colors" href="#" onClick={() => setIsMenuOpen(false)}>
-              Contact
-            </Link>
           </nav>
           <Button
             variant="ghost"
@@ -231,7 +233,12 @@ export default function Component() {
               Curated, luxurious experiences for discerning couples. Effortlessly plan and book your perfect evening.
             </p>
             <div className="space-x-4">
-              <Button className="bg-yellow-500 text-gray-900 hover:bg-yellow-400">Explore Experiences</Button>
+              <Button 
+                className="bg-yellow-500 text-gray-900 hover:bg-yellow-400"
+                onClick={scrollToExperiences}
+              >
+                Explore Experiences
+              </Button>
               <Button 
                 variant="outline" 
                 className="border-gray-300 text-gray-300 hover:bg-gray-800"
@@ -242,7 +249,7 @@ export default function Component() {
             </div>
           </div>
         </section>
-        <section className="w-full py-12 md:py-16 bg-gray-800">
+        <section id="experiences" className="w-full py-12 md:py-16 bg-gray-800 pt-24">
           <div className="container px-4 md:px-6">
             <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl text-gray-100 mb-12 text-center">
               We got you covered!
